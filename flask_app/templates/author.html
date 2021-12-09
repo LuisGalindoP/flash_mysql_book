@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors info</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.css') }}">
+</head>
+<body>
+    <div class="container col-sm-7">
+
+        <h2 class="bg-dark text-light mt-3 p-2 rounded">{{author_selected.name}} favorite books</h2>
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th># of pages</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for favs in author_fav_books %}
+                <tr>
+                    <td>{{favs.title}}</td>
+                    <td>{{favs.num_of_pages}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h3 class="bg-dark text-light mt-3 p-2 rounded">Add a favorite book</h3>
+        <div>
+            <form action="/authors/add_favorite/{{author_selected.id}}" method="POST">
+                <div class="form-group">
+                    <label for="book_title">Title</label>
+                    <select name="book_id" class="form-control">
+                        {% for book in all_books %}
+                        <option value="{{book.id}}">{{book.title}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3">Add book</button>
+                </form>
+        </div>
+        <a href="/">Home</a>
+    </div>
+</body>
+</html>

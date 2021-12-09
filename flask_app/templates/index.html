@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.css') }}">
+</head>
+<body>
+    <div class="container col-sm-7"> 
+        <h2 class="bg-dark text-light mt-3 p-2 rounded">All Authors</h2>
+        <div class="list-group mb-3">
+            {% for author in all_authors %}
+            <a href="/author/{{author.id}}" class="list-group-item bg-secondary text-light">{{author.name}}</a>
+            {% endfor %}
+        </div>
+            <h2 class="bg-dark text-light p-2 rounded">Add new author</h2>
+            <form action="/author/create" method="POST">
+                <div class="form-group">
+                    <label for="author_name">Author's Name:</label>
+                    <input type="text" name="author_name" class="form-control">
+                </div>
+                    <button type="submit" class="btn btn-primary mb-3">Add author</button>
+            </form>
+        <a href="/books">Books</a>
+</div>
+
+    
+</body>
+</html>

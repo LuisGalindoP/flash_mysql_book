@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authors info</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.css') }}">
+</head>
+<body>
+    <div class="container col-sm-7">
+
+        <h2 class="bg-dark text-light mt-3 p-2 rounded">{{book_selected.title}}</h2>
+
+        <h5 class="bg-secondary text-light rounded p-2">Who likes this book</h5>
+        <div class="list-group mb-3">
+            {% for name in fav_authors %}
+            <p class="list-group-item bg-secondary text-light">{{name.name}}</p>
+            {% endfor %}
+        </div>
+
+        <div>
+            <h3 class="bg-dark text-light mt-3 p-2 rounded">Add an author to list</h3>
+            <form action="/book/add_fav_author/{{book_selected.id}}" method="POST">
+                <div class="form-group">
+                    <select name="author_id" class="form-control">
+                        {% for author in all_authors %}
+                        <option value="{{author.id}}">{{author.name}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                    <button type="submit" class="btn btn-primary mb-3">Add author</button>
+            </form>
+        </div>
+    
+        <a href="/">Home</a>
+    </div>
+    
+</body>
+</html>
